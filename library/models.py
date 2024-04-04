@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import UserStudents, Address
+from users.models import Students
 
 
 class Author(models.Model):
@@ -11,9 +11,17 @@ class Author(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
+class Comments(models.Model):
+    comment = models.TextField()
+    create_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.comment}"
+
+
 class Books(models.Model):
     title = models.CharField(max_length=30)
-    year = models.IntegerField()
+    year = models.PositiveIntegerField()
     description = models.TextField()
     create_date = models.DateField(auto_created=True)
 
@@ -31,25 +39,15 @@ class BookAuthor(models.Model):
 
 
 class StudentsBook(models.Model):
-    student = models.ForeignKey(UserStudents, on_delete=models.CASCADE)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
-    create_date = models.DateTimeField(auto_now=True)
+    student = models.ManyToManyField(Students)
     books = models.ManyToManyField(Books)
+    comments = models.ManyToManyField(Comments, null=True, blank=True)
     take_date = models.DateTimeField(auto_now_add=True)
     returned_status = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.books} {self.returned_status}"
 
-
-class Comments(models.Model):
-    comment = models.TextField()
-    book = models.ForeignKey(Books, on_delete=models.CASCADE)
-    student = models.ForeignKey(StudentsBook, on_delete=models.CASCADE)
-    create_date = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.comment}"
 
 
 

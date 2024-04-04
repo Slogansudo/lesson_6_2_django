@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # extensions
     'django_extensions',
+    'import_export',
     # apps
     'library',
     'users',
