@@ -14,11 +14,14 @@ class AuthorAdmin(ImportExportModelAdmin):
 
 @admin.register(Books)
 class BooksAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'title', 'year', 'description', 'create_date')
-    list_display_links = ('id', 'title', 'year', 'description', 'create_date')
-    search_fields = ('id', 'title', 'year',)
+    list_display = ('id', 'title', 'year', 'descrip_10', 'create_date')
+    list_display_links = ('id', 'title', 'year', 'descrip_10', 'create_date')
+    search_fields = ('id', 'title')
     list_filter = ('id', 'title')
     ordering = ('id', 'title')
+
+    def descrip_10(self, obj):
+        return obj.description[:10]
 
 
 @admin.register(BookAuthor)
@@ -27,16 +30,25 @@ class BooksAuthorAdmin(ImportExportModelAdmin):
     list_display_links = ('id', 'create_date')
     search_fields = ('id', )
     list_filter = ('id', )
+    autocomplete_fields = ('author', 'book')
     ordering = ('id',)
 
 
 @admin.register(StudentsBook)
 class StudentsBookAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'take_date', 'returned_status')
+    list_display = ('id', 'take_date', 'comments_count', 'returned_status')
     list_display_links = ('id', 'take_date', 'returned_status')
     search_fields = ('id', )
     list_filter = ('id', )
+    autocomplete_fields = ('books', 'student', 'comments')
     ordering = ('id', )
+
+    def comments_count(self, obj):
+        return obj.comments.all().count()
+
+    def get_date(self, obj):
+        take_date.short_description = "GET DATE"
+        return obj.take_date
 
 
 @admin.register(Comments)

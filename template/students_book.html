@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Students Book</h1>
+    <ul>
+        {% for s_b in students_book %}
+        <li>
+            <p>
+                <a href="">student: {{students_book.student}} | book: {{students_book.book.title}} | comments: {{student_book.comment.comment}}</a><br>
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home_page1' %}"><h1>Back</h1></a>
+</body>
+</html>

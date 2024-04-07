@@ -9,6 +9,7 @@ class StudentsAdmin(ImportExportModelAdmin):
     list_display_links = ('id', 'first_name', 'last_name', 'email', 'age', 'status', 'address', "last_update")
     search_fields = ('id', 'first_name', 'last_name')
     ordering = ('first_name', 'address')
+    autocomplete_fields = ('address', )
 
 
 @admin.register(Address)

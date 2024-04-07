@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <div class="student">
+     <div>
+        <h1> This is Students page</h1>
+     </div>
+     <div>
+        <h1>Students:</h1>
+         <form>
+        {% csrf_token %}
+        <input type="search" value="{{search}}" name="search" placeholder="Search">
+        <button type="submit">Search</button>
+         </form>
+        <ul>
+            {% for student in students %}
+            <li>
+                <h1>
+                     <a href="{% url 'students_date' student.id %}">{{student.first_name}} {{ student.last_name }}</a>
+                 </h1>
+            </li>
+         {% endfor %}
+        </ul>
+         <br>
+     </div>
+     <div>
+         <a href="{% url 'home_page1' %}">Bask</a>
+     </div>
+ </div>
+</body>
+</html>

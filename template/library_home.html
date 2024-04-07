@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Hi mr user</h1>
+    <p>
+        welcome to library page
+    </p>
+    <form>
+        {% csrf_token %}
+        <input type="search" value="{{search}}" name="search" placeholder="Search">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for book in books %}
+        <li>
+            <h1>
+                <a href="{% url 'book_data' book.id %}">Title: {{book.title}}</a>
+            </h1>
+        </li>
+        {% endfor %}
+    </ul>
+    <p>____________________________________</p>
+    <a href="{% url 'students_book' %}"><h1>Students Book Comments</h1></a>
+    <a href="{% url 'home_page1' %}"><h1>Back</h1></a>
+</body>
+</html>
