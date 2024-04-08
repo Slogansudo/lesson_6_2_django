@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.views import View
 from .models import Students, Level
 from django.contrib.auth.models import User
-
 # Create your views here.
 
 
@@ -56,6 +55,6 @@ class StudentsLoginView(View):
         password = request.POST['password']
         student = Students.objects.filter(username=username, password=password).first()
         if student:
-            return redirect('home_page1')
+            return render(request, 'home_view_2.html')
         else:
             return render(request, 'login_not_found.html')

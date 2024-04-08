@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.views import View
 from django.contrib.auth.models import User
+from .forms import UserLoginForm
 
 
 def home_page1(request):
@@ -40,8 +41,14 @@ class UserRegisterView(View):
 
 class UsersLoginView(View):
     def get(self, request):
-        return render(request, 'login_view.html')
+        form = UserLoginForm()
+        return render(request, 'auth/login_users.html', {'form': form})
 
     def post(self, request):
         username = request.POST['username']
         password = request.POST['password']
+        user = User.objects.filter(username=username, password=password)
+        if user:
+            return render(request, 'home_view_2.html')
+        else:
+            return render(request, 'login_not_found.html')
