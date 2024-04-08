@@ -18,10 +18,12 @@ class Level(models.TextChoices):
 class Students(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    username = models.CharField(max_length=30)
     email = models.EmailField()
     age = models.PositiveIntegerField(null=True, blank=True)
     status = models.CharField(max_length=2, choices=Level.choices, blank=True)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
+    password = models.TextField()
     last_update = models.DateTimeField(auto_now=True)
 
     class Mode:

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Students Register page</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="first_name">First name: </label>
+        <input type="text" id="first_name" name="first_name"><br><br>
+
+        <label for="last_name">Last name: </label>
+        <input type="text" id="last_name" name="last_name"><br><br>
+
+        <label for="username">Username: </label>
+        <input type="text" id="username" name="username"><br><br>
+
+        <label for="email">Email: </label>
+        <input type="text" id="email" name="email"><br><br>
+
+        <ul>
+            {% for data in status %}
+            <li>
+                <h1>
+                    <input type="checkbox" value='{{data}}' name="status" placeholder="{{data}}">
+                    <p>{{data}}</p>
+                </h1>
+            </li>
+            {% endfor %}
+        </ul>
+        <label for="password1">password: </label>
+        <input type="password" id="password1" name="password1"><br><br>
+
+        <label for="password2">Reenter password: </label>
+        <input type="password" id="password2" name="password2"><br><br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+    <a href="{% url 'login_s' %}">Sig in</a>
+</body>
+</html>
