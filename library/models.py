@@ -23,19 +23,23 @@ class Books(models.Model):
     title = models.CharField(max_length=30)
     year = models.PositiveIntegerField()
     description = models.TextField()
+    author = models.ManyToManyField(Author)
+    price = models.FloatField()
+    count = models.PositiveIntegerField(default=1)
+    image = models.ImageField(upload_to='media/book')
     create_date = models.DateField(auto_created=True)
 
     def __str__(self):
         return f"{self.title} {self.year}"
 
 
-class BookAuthor(models.Model):
+"""class BookAuthor(models.Model):
     book = models.ManyToManyField(Books)
     author = models.ManyToManyField(Author)
     create_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.book} {self.author}"
+        return f"{self.book} {self.author}"""
 
 
 class StudentsBook(models.Model):

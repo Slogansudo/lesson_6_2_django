@@ -7,13 +7,27 @@
 <body>
     <h1>Students Book</h1>
     <ul>
-        {% for s_b in students_book %}
-        <li>
-            <p>
-                <a href="">student: {{students_book.student}} | book: {{students_book.book.title}} | comments: {{student_book.comment.comment}}</a><br>
-            </p>
-        </li>
+        {% for sb in students_book %}
+            {% for data in sb.student.all %}
+            {% for data2 in sb.comments.all %}
+            {% for data3 in sb.books.all %}
+            <li>
+                <h1>page 1</h1>
+                <p>
+                    <a href="">student: {{data.first_name}}</a><br>
+                </p>
+                <p>
+                    <a href="">book: {{data3.title}}</a><br>
+                </p>
+                <p>
+                    <a href="">comments: {{data2.comment}}</a><br>
+                </p>
+            </li>
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
         {% endfor %}
+
     </ul>
     <a href="{% url 'home_page1' %}"><h1>Back</h1></a>
 </body>

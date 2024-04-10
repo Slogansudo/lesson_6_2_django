@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Books, BookAuthor, StudentsBook, Comments
+from .models import Author, Books, StudentsBook, Comments
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -24,27 +24,23 @@ class BooksAdmin(ImportExportModelAdmin):
         return obj.description[:10]
 
 
-@admin.register(BookAuthor)
+"""@admin.register(BookAuthor)
 class BooksAuthorAdmin(ImportExportModelAdmin):
     list_display = ('id', 'create_date')
     list_display_links = ('id', 'create_date')
     search_fields = ('id', )
     list_filter = ('id', )
     autocomplete_fields = ('author', 'book')
-    ordering = ('id',)
+    ordering = ('id',)"""
 
 
 @admin.register(StudentsBook)
 class StudentsBookAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'take_date', 'comments_count', 'returned_status')
+    list_display = ('id', 'take_date', 'returned_status')
     list_display_links = ('id', 'take_date', 'returned_status')
     search_fields = ('id', )
     list_filter = ('id', )
-    autocomplete_fields = ('books', 'student', 'comments')
     ordering = ('id', )
-
-    def comments_count(self, obj):
-        return obj.comments.all().count()
 
     def get_date(self, obj):
         take_date.short_description = "GET DATE"

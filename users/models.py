@@ -24,6 +24,7 @@ class Students(models.Model):
     status = models.CharField(max_length=2, choices=Level.choices, blank=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     password = models.TextField()
+    image = models.ImageField(upload_to='media/Students')
     last_update = models.DateTimeField(auto_now=True)
 
     class Mode:

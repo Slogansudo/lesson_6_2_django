@@ -5,28 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-    <div class="image_1">
-        <img src="https://yuz.uz/imageproxy/1200x/https://yuz.uz/file/news/1d61aded6f8ad28f9e18fe349b327f33.jpg" alt="">
             <div class="home">
                 <h1>Hello developers, welcome to my first web application</h1>
-                <div>
-                    <h1><a href="http://127.0.0.1:8000/library/" target="_blank"> Library page</a></h1>
-                </div>
-                <div>
-                    <h1><a href="http://127.0.0.1:8000/students/" target="_blank"> Students page</a></h1>
-                </div>
-                <div>
-                    <h1><a href="{% url 'register_view' %}">Sign Up</a></h1>
-                </div>
-                <div>
-                    <h1><a href="{% url 'login_view' %}">Sig In</a></h1>
-                </div>
+                {% if request.user.is_authenticated %}
+                    <div>
+                        <h1><a href="{% url 'library' %}"> Library page</a> | <a href="{% url 'students' %}"> Students page</a> | <a href="{% url 'logout' %}">Log Out</a></h1>
+                    </div>
+                {% else %}
+                    <div>
+                        <h1><a href="{% url 'register_view' %}">Sign Up</a> | <a href="{% url 'login_view' %}">Sig In</a> | <a href="{% url 'library' %}"> Library page</a> | <a href="{% url 'students' %}"> Students page</a></h1>
+                    </div>
+                {% endif %}
                 <div>
                     <h1><a href="http://127.0.0.1:8000/admin/login/?next=/admin/" target="_parent">Admin page</a></h1>
                 </div>
             </div>
-    </div>
-
 </body>
 </html>
 
